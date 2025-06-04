@@ -1,0 +1,51 @@
+import java.util.Stack;
+public class BrowseHistory{
+    private final Stack<String> backStack=new Stack<>();
+    private final Stack<String> forwardStack=new Stack<>();
+    private String currentPage="Home";
+    public void visit(String pages){
+        backStack.push(currentPage);
+        currentPage=pages;
+        forwardStack.clear();
+        System.out.println("Visited" +pages);
+    }
+    public void back(){
+        if(!backStack.isEmpty()){
+		forwardStack.push(currentPage);
+		currentPage=backStack.pop();
+		System.out.println("Previou page" +currentPage);
+		
+       } else {
+		System.out.println("no pages are back");
+	}
+
+}
+    public void forward(){
+	if(!forwardStack.isEmpty()){
+		backStack.push(currentPage);
+		currentPage=forwardStack.pop();
+		System.out.println("Next page"+currentPage);
+} else {
+	System.out.println("no pages are found");
+	}
+}
+    public void showCurrentPage(){
+	System.out.println("current page"+currentPage);
+	}
+    /*private void log(String message){
+	System.out.println("message");
+	}*/
+
+public static void main(String[] args){
+	BrowseHistory bh=new BrowseHistory();
+	bh.showCurrentPage();
+	bh.visit("page 1");
+	bh.visit("page 2");
+	bh.visit("page 3");
+	bh.visit("page 4");
+	
+	bh.back();
+	bh.forward();
+	bh.showCurrentPage();
+  }
+}
